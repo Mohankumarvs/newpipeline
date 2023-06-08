@@ -8,7 +8,8 @@
     "allure:clear": "rm -r allure-results/ allure-report cypress/screenshots || true",
     "allure:report":"allure generate allure-results --clean -o allure-report",
     "allure:history":"mv -f allure-report/history allure-results/history && rm -r allure-report || true",
-    "test":"npm run ui-regression-allure && npm run allure:report && npx allure open"
+    "test":"npm run ui-regression-allure && npm run allure:report && npx allure open",
+    "posttest":"npm run ui-regression-allure && npm run allure:report"
     
   },
   "keywords": [],
