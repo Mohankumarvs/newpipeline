@@ -2,14 +2,14 @@ pipeline {
   agent any
 
   stages {
-    stage('Install Playwright') {
-      steps {
-        sh '''
-          npm i -D @playwright/test
-          npx playwright install
-        '''
-      }
-    }
+    // stage('Install Playwright') {
+    //   steps {
+    //     sh '''
+    //       npm i -D @playwright/test
+    //       npx playwright install
+    //     '''
+    //   }
+    // }
 
     stage('Run Tests') {
       steps {
