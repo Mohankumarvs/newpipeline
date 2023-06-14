@@ -9,7 +9,8 @@
     "allure:report":"allure generate allure-results --clean -o allure-report",
     "allure:history":"mv -f allure-report/history allure-results/history && rm -r allure-report || true",
     "test":"npm run ui-regression-allure && npm run allure:report && npx allure open",
-    "posttest":"npm run ui-regression-allure && npm run allure:report"
+    "posttest":"npm run ui-regression-allure && npm run open-allure",
+    "open-allure": "allure open & sleep 5 && open http://localhost:5050 && sleep 1 && pkill -2 allure"
     
   },
   "keywords": [],
