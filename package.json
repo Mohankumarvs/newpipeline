@@ -11,8 +11,7 @@
     "test": "npm run ui-regression-allure && npm run allure:report && npm run open-allure",
     "posttest": "npm run ui-regression-allure && npm run allure:report && npm run close-allure",
     "open-allure": "allure open",
-    "close-allure": "npx kill-port 5050"
-    
+    "close-allure": "npx kill-port 5050"  
   },
   "keywords": [],
   "author": "",
