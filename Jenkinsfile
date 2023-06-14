@@ -1,28 +1,42 @@
 pipeline {
   agent any
-
+  
   stages {
-    // stage('Install Playwright') {
-    //   steps {
-    //     sh '''
-    //       npm i -D @playwright/test
-    //       npx playwright install
-    //     '''
-    //   }
-    // }
-
-    stage('Run Tests') {
+    stage('Build') {
       steps {
-        sh '''
-          npm run posttest
-        '''
+        // Clone the Git repository
+        git 'https://github.com/your-username/your-repository.git'
+        
+        // Install project dependencies
+        sh 'npm ci' // or any other command for installing dependencies
+        
+        // Build your project
+        sh 'npm run build' // or any other build command specific to your project
       }
-      post {
-        success {
-          archiveArtifacts artifacts: 'homepage-*.png', followSymlinks: false
-          sh 'rm -rf *.png'
-        }
+    }
+    
+    stage('Test and Generate Allure Report') {
+      steps {
+        // Run tests
+        sh 'npm run test'
+        
+        // Generate the Allure report
+        sh 'npm run posttest'
       }
+    }
+  }
+  
+  post {
+    always {
+      // Archive Allure report artifacts
+      archiveArtifacts artifacts: 'allure-results/*'
+      
+      // Publish Allure report
+      allure([
+        includeProperties: false,
+        jdk: '10.0.19',
+        results: [[path: 'allure-results']]
+      ])
     }
   }
 }
